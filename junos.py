@@ -1,7 +1,6 @@
 from lxml import etree
 
-from jnpr.junos import Device
-from jnpr.junos import exception
+from jnpr.junos import Device, exception
 
 
 class PyEZ(object):
