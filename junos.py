@@ -1,9 +1,7 @@
 from lxml import etree
 
 from jnpr.junos import Device
-from jnpr.junos.exception import (
-    ConnectAuthError, ConnectTimeoutError, ConnectRefusedError
-    )
+from jnpr.junos import exception
 
 
 class PyEZ(object):
@@ -23,13 +21,13 @@ class PyEZ(object):
         try:
             self.conn.open()
 
-        except ConnectAuthError as e:
+        except exception.ConnectAuthError as e:
             raise e
 
-        except ConnectTimeoutError as e:
+        except exception.ConnectTimeoutError as e:
             raise e
 
-        except ConnectRefusedError as e:
+        except exception.ConnectRefusedError as e:
             raise e
 
         self.facts = self.conn.facts 
