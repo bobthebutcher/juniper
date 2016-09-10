@@ -5,6 +5,9 @@ from jnpr.junos.exception import (
 
 
 class PyEZ(object):
+    """
+    Instantiate a connection to a Junos device with the pyez module
+    """
     def __init__(self, host, username, password, timeout=5, gather_facts=False):
         self.host = host
         self.username = username
@@ -31,6 +34,9 @@ class PyEZ(object):
 
 
     def open_connection(self):
+        """
+        Open connection if not already open
+        """
         if self.conn.connected:
             return "Connection to {0} already open".format(self.host)
         else:
@@ -39,6 +45,9 @@ class PyEZ(object):
 
 
     def close_connection(self):
+        """
+        Close connection if not aleardy closed
+        """
         if not self.conn.connected:
             return "Connection to {0} already closed".format(self.host)
         else:
@@ -61,5 +70,7 @@ class PyEZ(object):
 
 
     def cli_command(self, command, warning=False):
-        """ Debugging only, dont use this as part of workflow """
+        """ 
+        Debugging only, dont use this as part of production workflow
+        """
         return self.conn.cli(command=command, warning=warning)
