@@ -1,3 +1,5 @@
+from lxml import etree
+
 from jnpr.junos import Device
 from jnpr.junos.exception import (
     ConnectAuthError, ConnectTimeoutError, ConnectRefusedError
@@ -58,7 +60,7 @@ class PyEZ(object):
     def get_facts(self, refresh=False):
         """
         Get device facts
-        :param: refresh: refresh the device facts
+        :param refresh: refresh the device facts
         """
         if self.gather_facts and not refresh:
             return self.facts
@@ -74,3 +76,20 @@ class PyEZ(object):
         Debugging only, dont use this as part of production workflow
         """
         return self.conn.cli(command=command, warning=warning)
+
+
+    def get_rcp_command(self, command, get_xml=False):
+        """
+        Converts a junos cli command to its rpc equivalent
+        :param command: junos command to convert
+        :param get_xml: return command as xml tree
+        :return: returns rpc comamnd as a string
+        """
+        result = self.conn.display_xml_rpc(command)
+        if 'invalid command' in result:
+            return 'Invalid command: {0}'.format(command)
+        else:
+            if get_xml:
+                return etree.dump(result)
+            return result.tag.replace('-', '_')
+
