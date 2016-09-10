@@ -1,5 +1,7 @@
 from jnpr.junos import Device
-from jnpr.junos.exception import ConnectAuthError, ConnectTimeoutError
+from jnpr.junos.exception import (
+    ConnectAuthError, ConnectTimeoutError, ConnectRefusedError
+    )
 
 
 class PyEZ(object):
@@ -19,6 +21,9 @@ class PyEZ(object):
             raise e
 
         except ConnectTimeoutError as e:
+            raise e
+
+        except ConnectRefusedError as e:
             raise e
 
     def get_facts(self):
