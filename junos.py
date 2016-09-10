@@ -15,9 +15,6 @@ class PyEZ(object):
         self.conn = Device(host=self.host, user=self.username, passwd=self.password,
                            timeout=self.timeout, gather_facts=self.gather_facts)
 
-        if self.gather_facts:
-            self.facts = self.conn.facts
-
         try:
             self.conn.open()
 
@@ -29,6 +26,8 @@ class PyEZ(object):
 
         except ConnectRefusedError as e:
             raise e
+
+        self.facts = self.conn.facts 
 
     def close_connection(self):
         self.conn.close()
@@ -45,6 +44,7 @@ class PyEZ(object):
         else:
             self.conn.facts_refresh()
             self.facts = self.conn.facts
+            self.gather_facts = True
             return self.facts
 
 
