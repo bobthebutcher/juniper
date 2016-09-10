@@ -5,14 +5,15 @@ from jnpr.junos.exception import (
 
 
 class PyEZ(object):
-    def __init__(self, host, username, password, timeout=5):
+    def __init__(self, host, username, password, timeout=5, gather_facts=False):
         self.host = host
         self.username = username
         self.password = password
         self.timeout = timeout
+        self.gather_facts = gather_facts
 
         self.conn = Device(host=self.host, user=self.username, passwd=self.password,
-                           timeout=self.timeout)
+                           timeout=self.timeout, gather_facts=self.gather_facts)
 
         try:
             self.conn.open()
@@ -26,5 +27,14 @@ class PyEZ(object):
         except ConnectRefusedError as e:
             raise e
 
-    def get_facts(self):
-        return self.conn.facts
+
+    def get_facts(self, refresh=False):
+        if self.gather_facts and not refresh:
+            return self.conn.facts
+        else:
+            self.conn.facts_refresh()
+            return self.conn.facts
+
+
+    def cli_command(self, command, warning=False):
+        return self.conn.cli(command=command, warning=warning)
