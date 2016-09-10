@@ -29,9 +29,21 @@ class PyEZ(object):
 
         self.facts = self.conn.facts 
 
+
+    def open_connection(self):
+        if self.conn.connected:
+            return "Connection to {0} already open".format(self.host)
+        else:
+            self.conn.open()
+            return "Connection to {0} opened".format(self.host)
+
+
     def close_connection(self):
-        self.conn.close()
-        return "Connection to {0} closed".format(self.host)
+        if not self.conn.connected:
+            return "Connection to {0} already closed".format(self.host)
+        else:
+            self.conn.close()
+            return "Connection to {0} closed".format(self.host)
 
 
     def get_facts(self, refresh=False):
