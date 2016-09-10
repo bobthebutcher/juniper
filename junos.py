@@ -15,6 +15,9 @@ class PyEZ(object):
         self.conn = Device(host=self.host, user=self.username, passwd=self.password,
                            timeout=self.timeout, gather_facts=self.gather_facts)
 
+        if self.gather_facts:
+            self.facts = self.conn.facts
+
         try:
             self.conn.open()
 
@@ -34,10 +37,11 @@ class PyEZ(object):
         :param: refresh: refresh the device facts
         """
         if self.gather_facts and not refresh:
-            return self.conn.facts
+            return self.facts
         else:
             self.conn.facts_refresh()
-            return self.conn.facts
+            self.facts = self.conn.facts
+            return self.facts
 
 
     def cli_command(self, command, warning=False):
