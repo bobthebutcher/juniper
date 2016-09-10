@@ -30,6 +30,10 @@ class PyEZ(object):
         except ConnectRefusedError as e:
             raise e
 
+    def close_connection(self):
+        self.conn.close()
+        return "Connection to {0} closed".format(self.host)
+
 
     def get_facts(self, refresh=False):
         """
