@@ -29,6 +29,10 @@ class PyEZ(object):
 
 
     def get_facts(self, refresh=False):
+        """
+        Get device facts
+        :param: refresh: refresh the device facts
+        """
         if self.gather_facts and not refresh:
             return self.conn.facts
         else:
@@ -37,4 +41,5 @@ class PyEZ(object):
 
 
     def cli_command(self, command, warning=False):
+        """ Debugging only, dont use this as part of workflow """
         return self.conn.cli(command=command, warning=warning)
