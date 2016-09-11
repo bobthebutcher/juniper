@@ -31,7 +31,6 @@ class PyEZ(object):
 
         self.facts = self.conn.facts 
 
-
     def open_connection(self):
         """
         Open connection if not already open
@@ -42,7 +41,6 @@ class PyEZ(object):
             self.conn.open()
             return "Connection to {0} opened".format(self.host)
 
-
     def close_connection(self):
         """
         Close connection if not aleardy closed
@@ -52,7 +50,6 @@ class PyEZ(object):
         else:
             self.conn.close()
             return "Connection to {0} closed".format(self.host)
-
 
     def get_facts(self, refresh=False):
         """
@@ -67,13 +64,11 @@ class PyEZ(object):
             self.gather_facts = True
             return self.facts
 
-
     def cli_command(self, command, warning=False):
         """ 
         Debugging only, dont use this as part of production workflow
         """
         return self.conn.cli(command=command, warning=warning)
-
 
     def get_rcp_command(self, command, get_xml=False):
         """
@@ -89,7 +84,6 @@ class PyEZ(object):
             if get_xml:
                 return etree.dump(result)
             return result.tag.replace('-', '_')
-
 
     def show_interfaces(self):
         return self.conn.rpc.get_interface_information() 
