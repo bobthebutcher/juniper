@@ -90,3 +90,6 @@ class PyEZ(object):
                 return etree.dump(result)
             return result.tag.replace('-', '_')
 
+
+    def show_interfaces(self):
+        return self.conn.rpc.get_interface_information() 
