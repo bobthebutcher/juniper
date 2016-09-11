@@ -65,7 +65,7 @@ class PyEZ(object):
             self.gather_facts = True
             return self.facts
 
-    def cli_command(self, command, warning=False):
+    def cli_command(self, command, warning=True):
         """ 
         Debugging only, dont use this as part of production workflow
         """
