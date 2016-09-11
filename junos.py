@@ -30,6 +30,7 @@ class PyEZ(object):
             raise e
 
         self.facts = self.conn.facts 
+        self.rpc = self.conn.rpc
 
     def open_connection(self):
         """
@@ -85,5 +86,3 @@ class PyEZ(object):
                 return etree.dump(result)
             return result.tag.replace('-', '_')
 
-    def show_interfaces(self):
-        return self.conn.rpc.get_interface_information() 
