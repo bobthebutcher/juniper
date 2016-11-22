@@ -44,7 +44,7 @@ class PyEZ(object):
 
     def close_connection(self):
         """
-        Close connection if not aleardy closed
+        Close connection if not already closed
         """
         if not self.conn.connected:
             return "Connection to {0} already closed".format(self.host)
@@ -67,7 +67,7 @@ class PyEZ(object):
 
     def cli_command(self, command, warning=True):
         """ 
-        Debugging only, dont use this as part of production workflow
+        Debugging only, don't use this as part of production workflow
         """
         return self.conn.cli(command=command, warning=warning)
 
