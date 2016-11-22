@@ -86,3 +86,10 @@ class PyEZ(object):
                 return etree.dump(result)
             return result.tag.replace('-', '_')
 
+    def get_config(self):
+        """
+        Get config as XML
+        :return: config as XML
+        """
+        return self.conn.rpc.get_config()
+
