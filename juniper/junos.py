@@ -93,14 +93,14 @@ class PyEZ(object):
         """
         return self.conn.rpc.get_config()
 
-    def get_interface_information(self, interface):
+    def get_interface_information(self, interface_name):
         """
         Get interface info
-        :param interface: name of interface
+        :param interface_name: name of interface
         :return: config as XML
         """
-        if interface:
-            return self.conn.rpc.get_interface_information(interface_name=interface)
+        if interface_name:
+            return self.conn.rpc.get_interface_information(interface_name=interface_name)
         return self.conn.rpc.get_interface_information()
 
     def get_zones_information(self):
