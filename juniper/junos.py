@@ -7,15 +7,18 @@ class PyEZ(object):
     """
     Instantiate a connection to a Junos device with the pyez module
     """
-    def __init__(self, host, username, password, timeout=5, gather_facts=False):
+    def __init__(self, host, username, password, timeout=5, gather_facts=False,
+                 ssh_config_file=''):
         self.host = host
         self.username = username
         self.password = password
         self.timeout = timeout
         self.gather_facts = gather_facts
+        self.ssh_config_file = ssh_config_file
 
         self.conn = Device(host=self.host, user=self.username, passwd=self.password,
-                           timeout=self.timeout, gather_facts=self.gather_facts)
+                           timeout=self.timeout, gather_facts=self.gather_facts,
+                           ssh_config_file=self.ssh_config_file)
 
         try:
             self.conn.open()
