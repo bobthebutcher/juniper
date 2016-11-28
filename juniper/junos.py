@@ -8,7 +8,7 @@ class PyEZ(object):
     Instantiate a connection to a Junos device with the pyez module
     """
     def __init__(self, host, username, password, timeout=5, gather_facts=False,
-                 ssh_config=''):
+                 ssh_config='~/.ssh/config'):
         self.host = host
         self.username = username
         self.password = password
